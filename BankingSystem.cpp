@@ -4,7 +4,7 @@ using namespace std;
 using namespace BankingSystem;
 
 
-Account accArr[MAX_ACCOUNT];
+Account* accArr[MAX_ACCOUNT];
 int accNum = 0;
 
 void BankingSystem::ShowMenu (void)
@@ -27,34 +27,28 @@ void BankingSystem::MakeAccount (void)
     cout << "Account ID:";
     cin >> accID;
 
-    if(GetAccount(accID) == -1)
+    if(GetAccount(accID) == NULL)
     {
-        accArr[accNum].accID = accID;
+        cout << "Name:";
+        cin >> name;
+
+        cout << "Deposit:";
+        cin >> balance;
+
+        accArr[accNum++] = new Account(accID, name, balance);
     }
     else
     {
         cout << "[Error] The Accoun ID already exist" << endl;
         return;
     }
-
-    cout << "Name:";
-    cin >> name;
-
-    strcpy (accArr[accNum].cusName, name);
-
-    cout << "Deposit:";
-    cin >> balance;
-
-    accArr[accNum].balance = balance;
-
-    accNum++;
 }
 
 void BankingSystem::UpdateBalance (int action)
 {
     int accID = -1;
-    int index = 0;
     int balance;
+    Account* pAcc;
 
     if(action == DEPOSIT)
     {
@@ -68,9 +62,9 @@ void BankingSystem::UpdateBalance (int action)
     cout << "Account ID:";
     cin >> accID;
 
-    index = GetAccount(accID);
+    pAcc = GetAccount(accID);
 
-    if(index == -1)
+    if(pAcc == NULL)
     {
         cout << "[Error] Wrong Account ID." << endl;
         return;
@@ -81,17 +75,17 @@ void BankingSystem::UpdateBalance (int action)
 
     if(action == DEPOSIT)
     {
-        accArr[index].balance += balance;
+        pAcc->Deposit(balance);
     }
     else
     {
-        if (accArr[index].balance >= balance)
+        if (pAcc->GetBalance() >= balance)
         {
-            accArr[index].balance -= balance;
+            pAcc->Withdraw(balance);
         }
         else
         {
-            cout << "[Error] The balance is not enough: " << accArr[index].balance << endl;
+            cout << "[Error] The balance is not enough: " << pAcc->GetBalance() << endl;
             return;
         }       
     }
@@ -104,21 +98,26 @@ void BankingSystem::ShowAllAccInfo (void)
 {
     for (int i = 0; i < accNum; i++)
     {
-        cout << "Account ID: " << accArr[i].accID << endl;
-        cout << "Name: " << accArr[i].cusName << endl;
-        cout << "Balance: " << accArr[i].balance << endl << endl;
+        accArr[i]->ShowAccountInfo();
     }
 }
 
-int BankingSystem::GetAccount (int accID)
+Account* BankingSystem::GetAccount (int accID)
 {
-    for (int i = 0; i < BankingSystem::MAX_ACCOUNT; i++)
+    for (int i = 0; i < accNum; i++)
     {
-        if(accArr[i].accID == accID)
+        if(accArr[i]->GetAccountID() == accID)
         {
-            return i;
+            return accArr[i];
         }
     }
 
-    return -1;
+    return NULL;
+}
+
+void Account::ShowAccountInfo(void)
+{
+    cout << "Account ID: " << accID << endl;
+    cout << "Name: " << cusName << endl;
+    cout << "Balance: " << balance << endl << endl;
 }
