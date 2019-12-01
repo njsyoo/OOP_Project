@@ -38,9 +38,9 @@ namespace BankingSystem
 
         void Deposit (int balance) {this->balance += balance;}
         void Withdraw (int balance) {this->balance -= balance;}
-        int GetBalance (void) {return balance; }
-        int GetAccountID (void) { return accID; }
-        void ShowAccountInfo(void);
+        int GetBalance (void) const {return balance; }
+        int GetAccountID (void) const { return accID; }
+        void ShowAccountInfo(void) const;
 
         private:
         int accID;

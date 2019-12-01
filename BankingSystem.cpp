@@ -115,7 +115,7 @@ Account* BankingSystem::GetAccount (int accID)
     return NULL;
 }
 
-void Account::ShowAccountInfo(void)
+void Account::ShowAccountInfo(void) const
 {
     cout << "Account ID: " << accID << endl;
     cout << "Name: " << cusName << endl;
