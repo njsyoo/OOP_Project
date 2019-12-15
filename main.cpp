@@ -6,10 +6,11 @@ using namespace std;
 int main (void)
 {
     int user_input = 0;
+    AccountHandler AccHandler;
 
     while (1)
     {
-        ShowMenu();
+        AccHandler.ShowMenu();
 
         cout << "Select: ";
         cin >> user_input;
@@ -23,21 +24,22 @@ int main (void)
         switch (user_input)
         {
             case MAKE:
-                MakeAccount();
+                AccHandler.MakeAccount();
                 break;
             case DEPOSIT:
-                UpdateBalance(DEPOSIT);
+                AccHandler.UpdateBalance(DEPOSIT);
                 break;
             case WITHDRAW:
-                UpdateBalance(WITHDRAW);
+                AccHandler.UpdateBalance(WITHDRAW);
                 break;
             case INQUIRE:
-                ShowAllAccInfo();
+                AccHandler.ShowAllAccInfo();
                 break;
             case EXIT:
                 return 0;
             default:
                 cout << "Wrong Input!" << endl;
+                return 0;
         }
 
     }

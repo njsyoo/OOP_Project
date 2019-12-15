@@ -3,11 +3,7 @@
 using namespace std;
 using namespace BankingSystem;
 
-
-Account* accArr[MAX_ACCOUNT];
-int accNum = 0;
-
-void BankingSystem::ShowMenu (void)
+void AccountHandler::ShowMenu (void)
 {
     cout << "-----Menu-----" << endl;
     cout << "1. Create Account" << endl;
@@ -17,7 +13,7 @@ void BankingSystem::ShowMenu (void)
     cout << "5. Exit Program" << endl;
 }
 
-void BankingSystem::MakeAccount (void)
+void AccountHandler::MakeAccount (void)
 {
     int accID;
     int balance;
@@ -44,7 +40,7 @@ void BankingSystem::MakeAccount (void)
     }
 }
 
-void BankingSystem::UpdateBalance (int action)
+void AccountHandler::UpdateBalance (int action)
 {
     int accID = -1;
     int balance;
@@ -94,7 +90,7 @@ void BankingSystem::UpdateBalance (int action)
 }
 
 
-void BankingSystem::ShowAllAccInfo (void)
+void AccountHandler::ShowAllAccInfo (void)
 {
     for (int i = 0; i < accNum; i++)
     {
@@ -102,7 +98,7 @@ void BankingSystem::ShowAllAccInfo (void)
     }
 }
 
-Account* BankingSystem::GetAccount (int accID)
+Account* AccountHandler::GetAccount (int accID)
 {
     for (int i = 0; i < accNum; i++)
     {
