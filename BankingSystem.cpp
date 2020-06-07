@@ -17,21 +17,63 @@ void AccountHandler::MakeAccount (void)
 {
     int accID;
     int balance;
+    int accountType;
+    int interestRate;
+    int creditLevel;
     char name[NAME_LEN];
 
-    cout << "[Create Account]" << endl;
+    cout << "[Select Account Type]" << endl;
+    cout << "1. Normal Account, 2. High Credit Account" << endl;
+    cin >> accountType;
+
+    if (accountType == 1)
+    {
+        cout << "[Create Normal Account]" << endl;
+    }
+    else if (accountType == 2)
+    {
+        cout << "[Create High Credit Account]" << endl;
+    }
+    else
+    {
+        cout << "Wrong Account Type" << endl;
+        return;
+    }  
+
     cout << "Account ID:";
     cin >> accID;
 
-    if(GetAccount(accID) == NULL)
+    if (GetAccount(accID) == NULL)
     {
-        cout << "Name:";
+        cout << "Name: ";
         cin >> name;
 
-        cout << "Deposit:";
+        cout << "Deposit: ";
         cin >> balance;
 
-        accArr[accNum++] = new Account(accID, name, balance);
+        cout << "Interest Rate: ";
+        cin >> interestRate;
+
+        if (accountType == 2)
+        {
+            cout << "Credit Level (1toA, 2toB, 3toC): ";
+            cin >> creditLevel;
+
+            if (creditLevel > 3)
+            {
+                cout << "Wrong credit level" << endl;
+                return;
+            } 
+        }
+
+        if (accountType == 1)
+        {
+            accArr[accNum++] = new NormalAccount(accID, name, balance, interestRate);
+        }
+        else if (accountType == 2)
+        {
+            accArr[accNum++] = new HighCreditAccount(accID, name, balance, interestRate, creditLevel);
+        }
     }
     else
     {
@@ -95,6 +137,7 @@ void AccountHandler::ShowAllAccInfo (void)
     for (int i = 0; i < accNum; i++)
     {
         accArr[i]->ShowAccountInfo();
+        cout << endl;
     }
 }
 
@@ -115,5 +158,5 @@ void Account::ShowAccountInfo(void) const
 {
     cout << "Account ID: " << accID << endl;
     cout << "Name: " << cusName << endl;
-    cout << "Balance: " << balance << endl << endl;
+    cout << "Balance: " << balance << endl;
 }
