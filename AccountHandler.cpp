@@ -1,7 +1,8 @@
-#include "BankingSystem.h"
-
-using namespace std;
-using namespace BankingSystem;
+#include "BankingCommonDecl.h"
+#include "AccountHandler.h"
+#include "Account.h"
+#include "NormalAccount.h"
+#include "HighCreditAccount.h"
 
 void AccountHandler::ShowMenu (void)
 {
@@ -26,11 +27,11 @@ void AccountHandler::MakeAccount (void)
     cout << "1. Normal Account, 2. High Credit Account" << endl;
     cin >> accountType;
 
-    if (accountType == 1)
+    if (accountType == ACCOUNT_TYPE_NORMAL)
     {
         cout << "[Create Normal Account]" << endl;
     }
-    else if (accountType == 2)
+    else if (accountType == ACCOUNT_TYPE_CREDIT)
     {
         cout << "[Create High Credit Account]" << endl;
     }
@@ -54,7 +55,7 @@ void AccountHandler::MakeAccount (void)
         cout << "Interest Rate: ";
         cin >> interestRate;
 
-        if (accountType == 2)
+        if (accountType == ACCOUNT_TYPE_CREDIT)
         {
             cout << "Credit Level (1toA, 2toB, 3toC): ";
             cin >> creditLevel;
@@ -66,11 +67,11 @@ void AccountHandler::MakeAccount (void)
             } 
         }
 
-        if (accountType == 1)
+        if (accountType == ACCOUNT_TYPE_NORMAL)
         {
             accArr[accNum++] = new NormalAccount(accID, name, balance, interestRate);
         }
-        else if (accountType == 2)
+        else if (accountType == ACCOUNT_TYPE_CREDIT)
         {
             accArr[accNum++] = new HighCreditAccount(accID, name, balance, interestRate, creditLevel);
         }
@@ -152,11 +153,4 @@ Account* AccountHandler::GetAccount (int accID)
     }
 
     return NULL;
-}
-
-void Account::ShowAccountInfo(void) const
-{
-    cout << "Account ID: " << accID << endl;
-    cout << "Name: " << cusName << endl;
-    cout << "Balance: " << balance << endl;
 }

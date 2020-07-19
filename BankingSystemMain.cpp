@@ -1,7 +1,5 @@
-#include "BankingSystem.h"
-
-using namespace BankingSystem;
-using namespace std;
+#include "BankingCommonDecl.h"
+#include "AccountHandler.h"
 
 int main (void)
 {
