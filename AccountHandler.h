@@ -2,6 +2,7 @@
 #define __ACCOUNT_HANDLER_H__
 
 #include "Account.h"
+#include "AccountArray.h"
 
 class AccountHandler
 {
@@ -26,7 +27,7 @@ class AccountHandler
     Account* GetAccount (int accID);    
 
     private:
-    Account* accArr[MAX_ACCOUNT];
+    BoundCheckAccountPtrArray accArr;
     int accNum;
 };
 

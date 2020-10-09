@@ -18,6 +18,18 @@ Account::~Account()
     delete []cusName;
 }
 
+Account& Account::operator= (const Account& ref_acc)
+{
+    accID = ref_acc.accID;
+    balance = ref_acc.balance;
+
+    delete []cusName;
+    cusName = new char[strlen(ref_acc.cusName) + 1];
+    strcpy(cusName, ref_acc.cusName);
+
+    return *this;
+}
+
 void Account::Deposit (int _balance) 
 {
     this->balance += balance;

@@ -16,6 +16,7 @@ public:
     int GetBalance (void) const;
     int GetAccountID (void) const;
     virtual void ShowAccountInfo(void) const;
+    Account& operator= (const Account& ref_acc);
 
 private:
     int accID;
