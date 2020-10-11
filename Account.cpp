@@ -1,33 +1,9 @@
  #include "BankingCommonDecl.h"
  #include "Account.h"
 
-Account::Account (int accID, char* name, int balance):accID(accID), balance(balance)
+Account::Account (int accID, String name, int balance):accID(accID), balance(balance)
 {
-    cusName = new char[strlen(name) + 1];
-    strcpy(cusName, name);
-}
-
-Account::Account (const Account &ref):accID(ref.accID), balance(ref.balance)
-{
-    cusName = new char[strlen(ref.cusName) + 1];
-    strcpy(cusName, ref.cusName);
-}
-
-Account::~Account()
-{
-    delete []cusName;
-}
-
-Account& Account::operator= (const Account& ref_acc)
-{
-    accID = ref_acc.accID;
-    balance = ref_acc.balance;
-
-    delete []cusName;
-    cusName = new char[strlen(ref_acc.cusName) + 1];
-    strcpy(cusName, ref_acc.cusName);
-
-    return *this;
+    cusName = name;
 }
 
 void Account::Deposit (int _balance) 

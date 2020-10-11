@@ -21,7 +21,7 @@ void AccountHandler::MakeAccount (void)
     int accountType;
     int interestRate;
     int creditLevel;
-    char name[NAME_LEN];
+    String name;
 
     cout << "[Select Account Type]" << endl;
     cout << "1. Normal Account, 2. High Credit Account" << endl;

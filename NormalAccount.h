@@ -3,11 +3,12 @@
 
 #include "BankingCommonDecl.h"
 #include "Account.h"
+#include "String.h"
 
 class NormalAccount : public Account // 보통 예금 계좌
     {
     public:
-        NormalAccount (int accID, char* name, int balance, int interest) : Account(accID, name, balance), interestRate(interest) {}
+        NormalAccount (int accID, String name, int balance, int interest) : Account(accID, name, balance), interestRate(interest) {}
 
         int GetInterestRate (void) { return interestRate; }
         

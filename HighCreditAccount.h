@@ -6,7 +6,7 @@
 class HighCreditAccount : public NormalAccount // 신용 신뢰 계좌
     {
     public:
-        HighCreditAccount (int accID, char* name, int balance, int interest, int credit) : NormalAccount(accID, name, balance, interest), creditLevel(credit) {}
+        HighCreditAccount (int accID, String name, int balance, int interest, int credit) : NormalAccount(accID, name, balance, interest), creditLevel(credit) {}
 
         void Deposit (int balance)
         {
