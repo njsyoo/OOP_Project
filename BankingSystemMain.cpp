@@ -19,27 +19,33 @@ int main (void)
             break;
         }
 
-        switch (user_input)
+        try
         {
-            case MAKE:
-                AccHandler.MakeAccount();
-                break;
-            case DEPOSIT:
-                AccHandler.UpdateBalance(DEPOSIT);
-                break;
-            case WITHDRAW:
-                AccHandler.UpdateBalance(WITHDRAW);
-                break;
-            case INQUIRE:
-                AccHandler.ShowAllAccInfo();
-                break;
-            case EXIT:
-                return 0;
-            default:
-                cout << "Wrong Input!" << endl;
-                return 0;
+            switch (user_input)
+            {
+                case MAKE:
+                    AccHandler.MakeAccount();
+                    break;
+                case DEPOSIT:
+                    AccHandler.UpdateBalance(DEPOSIT);
+                    break;
+                case WITHDRAW:
+                    AccHandler.UpdateBalance(WITHDRAW);
+                    break;
+                case INQUIRE:
+                    AccHandler.ShowAllAccInfo();
+                    break;
+                case EXIT:
+                    return 0;
+                default:
+                    cout << "Wrong Input!" << endl;
+                    return 0;
+            }
         }
+        catch(...)
+        {
 
+        }
     }
 
     return 0;

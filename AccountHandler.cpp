@@ -3,6 +3,7 @@
 #include "Account.h"
 #include "NormalAccount.h"
 #include "HighCreditAccount.h"
+#include "AccountException.h"
 
 void AccountHandler::ShowMenu (void)
 {
@@ -109,8 +110,21 @@ void AccountHandler::UpdateBalance (int action)
         return;
     }
 
-    cout << "Amount of Money:";
-    cin >> balance;
+    try
+    {
+        cout << "Amount of Money:";
+        cin >> balance;
+
+        if (balance < 0)
+        {
+            throw InputMoneyException(balance);
+        }
+    }
+    catch(AccountException& except)
+    {
+        except.ShowExceptionReason();
+        throw;
+    }
 
     if(action == DEPOSIT)
     {
@@ -118,14 +132,18 @@ void AccountHandler::UpdateBalance (int action)
     }
     else
     {
-        if (pAcc->GetBalance() >= balance)
+        try 
         {
+            if (pAcc->GetBalance() < balance)
+            {
+                throw WithdrawException(balance);
+            }
             pAcc->Withdraw(balance);
         }
-        else
+        catch(AccountException& except)
         {
-            cout << "[Error] The balance is not enough: " << pAcc->GetBalance() << endl;
-            return;
+            except.ShowExceptionReason();
+            throw;
         }       
     }
 
